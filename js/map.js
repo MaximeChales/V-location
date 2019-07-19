@@ -3,6 +3,7 @@ var map = {
     green: null,
     red: null,
     orange: null,
+    selected_station: null,
     init: function () {
 
  //initialisation de la map et des marqueurs        
@@ -29,10 +30,12 @@ var map = {
         if (station.available <= 5 ){
             status= this.orange
         }
-        
+       var  that = this
         L.marker([station.latitude, station.longitude], {icon: status}).addTo(this.map).on('click',function(){
             $('#submit').show()
             $('#infosstation').html (textpopup)
+
+            that.selected_station = station.address
         }).bindPopup(textpopup).openPopup();
 
     },

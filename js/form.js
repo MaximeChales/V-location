@@ -1,7 +1,8 @@
 var canvas = {
   oCanvas : null,
   signature : false,
- 
+  storage : false,
+
   init:function(){
     var that = this
     this.valider()
@@ -19,8 +20,14 @@ var canvas = {
 
   
     document.getElementById("bt-clear").addEventListener("click", function(e){that.clear()}); 
-
+    this.loadinfo()
     $('#submit').hide()
+
+  },
+
+  loadinfo : function (){
+    document.getElementById('name').value = localStorage.getItem('nameinfo'); 
+    document.getElementById('firstname').value = localStorage.getItem('firstnameinfo');
 
   },
 
@@ -84,6 +91,7 @@ var canvas = {
     oCapture.appendChild(oImage);
   }
 },
+
 // au clique sur le bouton "effacer" efface le contenu du canvas
  clear:function(oEvent){
  this.oCanvas = document.getElementById("canvas")
@@ -98,12 +106,22 @@ valider : function (){
   $('#form').submit(function(e){
     if (! that.signature){
       alert('Merci de signer dans l\'encadré prévu à cet effet.')
+      
     }
+
+    localStorage.setItem('nameinfo', document.getElementById("name").value)
+    localStorage.setItem('firstnameinfo', document.getElementById("firstname").value)
+  
+    var html = "Vélo réservé à la station " + app.map.selected_station + " par " +  document.getElementById("name").value + "  " + document.getElementById("firstname").value
+    html += "<br> Temps restant : "  
+    
+  document.getElementById("countdown").innerHTML = html
+
     return false
-  })
+  }
+   )
+
+
 
 }
-
-
-
 }
