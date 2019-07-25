@@ -19,7 +19,7 @@ var map = {
 
 //marqueurs et réglages des couleurs en fonction du nombre de vélos dispos / status de la station / 
     addmarker:function (station){
-        var textpopup ="<strong>STATION :</strong>" + "<br>" + "<br>" + station.address + "<br>" + "<br>" + "<strong>Vélos disponibles :</strong> " + station.available 
+        var textpopup ="<strong>STATION :</strong>" + "<br>" + station.address + "<br>" + "<br>" + "<strong>Vélos disponibles :</strong> " + station.available 
         var status = this.green
         if (station.available == 0 || station.status == "CLOSE" ){
             status = this.red
