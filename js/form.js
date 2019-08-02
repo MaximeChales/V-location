@@ -4,6 +4,7 @@ var canvas = {
   storage: false,
   timer: null,
   reservationdate: null,
+  maxtime: 1200000,
   init: function () {
     var that = this
     this.valider()
@@ -31,8 +32,16 @@ var canvas = {
     document.getElementById('firstname').value = localStorage.getItem('firstnameinfo');
     var stationname = sessionStorage.getItem('stationname')
     if (stationname) {
-      var html = "Vélo réservé à la station " + stationname + "<br> Temps restant : "
-      document.getElementById("countdown").innerHTML = html
+      app.map.selected_station = stationname
+     this.setReservationText()
+    }
+    this.reservationdate = sessionStorage.getItem('reservationdate')
+   
+    if (this.reservationdate) {
+     this.setReservationText()
+     this.launchtimer()
+      
+      
     }
   },
 
@@ -106,14 +115,23 @@ var canvas = {
   },
 
   launchtimer: function () {
-     var that = this
-      console.log('ce que je veux :p')
-      this.timer = setInterval (function(){
-    
-        var remain = new Date()-that.reservationdate
-        console.log(remain)
-      },1000)
-    
+    var that = this
+    this.timer = setInterval(function () {
+      
+      var remain = new Date() - that.reservationdate
+      console.log(new Date())
+      if (remain >= that.maxtime) {
+
+
+      }
+      var spent = that.maxtime - remain
+      
+      var minutes = Math.floor(spent / 60000)
+      var secondes = Math.floor((spent % 60000) / 1000)
+      document.getElementById('tempsrestant').innerHTML = ' ' + minutes + ' minutes et ' + secondes + ' secondes'
+
+    }, 1000)
+
   },
 
   valider: function () {
@@ -127,16 +145,27 @@ var canvas = {
       localStorage.setItem('nameinfo', document.getElementById("name").value)
       localStorage.setItem('firstnameinfo', document.getElementById("firstname").value)
       sessionStorage.setItem('stationname', app.map.selected_station)
-      var html = "Vélo réservé à la station " + app.map.selected_station + "<br> Temps restant : "
-      that.reservationdate = new Date()
-      document.getElementById("countdown").innerHTML = html
+     that.reservationdate = new Date()
+      sessionStorage.setItem('reservationdate', that.reservationdate)
+      that.setReservationText()
+      
       //timer
       that.launchtimer()
       return false
     }
     )
-//voir pour ne pas depasser les 20 mins 200000
+
+
+
+  },
+
+  setReservationText: function () {
+
+    var html = "Vélo réservé à la station " + app.map.selected_station + "<br> Temps restant : <span id='tempsrestant'> </span>"
+    document.getElementById("countdown").innerHTML = html
 
 
   }
+
+
 }
