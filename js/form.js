@@ -4,7 +4,7 @@ var canvas = {
   storage: false,
   timer: null,
   reservationdate: null,
-  maxtime: 1200000,
+  maxtime: 12000,
   init: function () {
     var that = this
     this.valider()
@@ -33,15 +33,15 @@ var canvas = {
     var stationname = sessionStorage.getItem('stationname')
     if (stationname) {
       app.map.selected_station = stationname
-     this.setReservationText()
+      this.setReservationText()
     }
     this.reservationdate = sessionStorage.getItem('reservationdate')
-   
+
     if (this.reservationdate) {
-     this.setReservationText()
-     this.launchtimer()
-      
-      
+      this.setReservationText()
+      this.launchtimer()
+
+
     }
   },
 
@@ -117,55 +117,65 @@ var canvas = {
   launchtimer: function () {
     var that = this
     this.timer = setInterval(function () {
-      
+
       var remain = new Date() - that.reservationdate
-      console.log(new Date())
+
       if (remain >= that.maxtime) {
-
-
+        alert('Votre réservation à expiré !')
+        that.stoptimer()
       }
+
       var spent = that.maxtime - remain
-      
+
       var minutes = Math.floor(spent / 60000)
       var secondes = Math.floor((spent % 60000) / 1000)
       document.getElementById('tempsrestant').innerHTML = ' ' + minutes + ' minutes et ' + secondes + ' secondes'
 
     }, 1000)
 
+
+
+  },
+  /**
+   * Arret du timmer pour le délais de reservation 
+   */
+  stoptimer: function () {
+
+    sessionStorage.clear()
+    clearInterval(this.timer)
+    document.getElementById("countdown").innerHTML = ''
+    var oCtx = this.oCanvas.getContext('2d');
+    oCtx.clearRect(0, 0, this.oCanvas.width, this.oCanvas.height);
   },
 
+
+  /**
+   *validation de la réservation */
   valider: function () {
     var that = this
     $('#form').submit(function (e) {
       if (!that.signature) {
         alert('Merci de signer dans l\'encadré prévu à cet effet.')
-
+        return false
       }
+
+  
       //sauvegarde des information entrées par l'utilisateur
       localStorage.setItem('nameinfo', document.getElementById("name").value)
       localStorage.setItem('firstnameinfo', document.getElementById("firstname").value)
       sessionStorage.setItem('stationname', app.map.selected_station)
-     that.reservationdate = new Date()
+      that.reservationdate = new Date()
       sessionStorage.setItem('reservationdate', that.reservationdate)
       that.setReservationText()
-      
+
       //timer
       that.launchtimer()
       return false
-    }
-    )
-
-
-
+    })
   },
-
   setReservationText: function () {
 
     var html = "Vélo réservé à la station " + app.map.selected_station + "<br> Temps restant : <span id='tempsrestant'> </span>"
     document.getElementById("countdown").innerHTML = html
-
-
-  }
-
-
+  },
 }
