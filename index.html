@@ -1,90 +1,87 @@
-<!doctype html>
-<html lang="fr">
+  <!doctype html>
+  <html lang="fr">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Louez votre vélo avec V-location</title>
-
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8">
+    <meta description ="Ce site à été crée dans le cadre de la formation OpenDéclick"> 
+    <meta name="viewport" content="width=device-width">
+    <title>Louez votre vélo avec V-location</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
 
 
-</head>
+  </head>
 
-<body>
-  <header>
-    <h1 id="titleheader"> V-location</h1>
-
-  </header>
-
-  <div id="content">
-    <div id="content-slider">
-
-      <img class="slide-active" src="./images/slide_1.png"" alt="étape 1" />
-      <img src="./images/slide_2.png" alt="étape 3" />
-      <img src="./images/slide_3.png" alt="étape 4" />
-
+  <body>
+    <header>
+      <h1 id="titleheader"> V-location</h1>
       <div id="buttons">
         <div id="prev"><i class="fas fa-angle-double-left fa-2x"></i></div>
         <a id="stop"><i class="fas fa-pause fa-2x"></i></a>
-
         <div id="next"><i class="fas fa-angle-double-right fa-2x"></i></div>
       </div>
-    </div>
-    <div id="content-map-booking">
-      <div id="map"> 
+    </header>
+
+    <div id="content">
+
+      <!--slider-->
+      <div id="content-slider">
+        <img class="slide-active" src="./images/1erslide.png" alt="étape 1" />
+        <img src="./images/2emeslide.png" alt="étape 2" />
+        <img src="./images/3emeslide.png" alt="étape 3" />
+      
+      </div>
+      <!-- slider end-->
+
+      <div id="content-map-booking">
+        <div id="map">
           <div class="infos"></div>
-      </div>
-      <div id="booking">
-        <form id="form">
-          <h2>Louez votre vélo avec V-location&nbsp;!</h2>
-          <div id='countdown'></div>
-          
-          
-          <div id="infosstation"></div>
-          <br><br>
-          <label for="Name" >Votre&nbsp;Nom:</label> <br>
-          <input type="text" id="name" required="required"><br>
-          <span class="txterror"></span>
-          <br>
-          <label for="firstname">Votre&nbsp;Prénom:</label> <br>
-          <input type="text" id="firstname" required="required"><br>
-          <span class="txterror"></span>
-          <br>
-          <label for="Name" >Votre&nbsp;Signature:</label> <br>
-          <canvas id="canvas"></canvas>
-          <span id="bt-clear" ><i class="fas fa-trash-alt"></i></span>
-          <br>
-          <span class="txterror"></span>
-      
-          
-          <br>
-          
-          <input type="submit" id="submit" class="button"></input>
-           
-        </form>
-      
+        </div>
+        <div id="booking">
+          <form id="form">
+            <h2>Louez votre vélo avec V-location&nbsp;!</h2>
+            <div id='countdown'></div>
+
+            <div id="infosstation"></div>
+            <br>
+            <label id="Name" for="Name">Votre&nbsp;Nom:</label> 
+            <input type="text" id="name" required="required"><br>
+            <span class="txterror"></span>
+            <br>
+            <label for="firstname">Votre&nbsp;Prénom:</label> 
+            <input type="text" id="firstname" required="required">
+            <span class="txterror"></span>
+            <br>
+            <label for="sign">Votre&nbsp;Signature:</label>
+            <canvas id="canvas"></canvas>
+            <span id="bt-clear"><i class="fas fa-trash-alt"></i></span>
+            <br>
+            <span class="txterror"></span> 
+            <input type="submit" id="submit" class="button">
+          </form>
+        </div>
       </div>
     </div>
-     
-  </div>
-  
 
-  <footer></footer>
-  <script src="https://code.jquery.com/jquery-3.4.0.min.js"
-    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-  <script src="js/slider.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/form.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/stations.js"></script>
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <footer>
+      <a id="CGU" href="#">Conditions générales d'utilisation</a>
+      <br><br>
+      <a id="MentionsLégales" href="#">Mentions Légales</a>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+      integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/stations.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
-</body>
+  </body>
 
-</html>
+  </html>

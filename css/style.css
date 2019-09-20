@@ -1,300 +1,89 @@
-*{
-margin:0;
+*{margin:0;font-family: 'Open Sans', sans-serif;}
+body{background-color:#d6cecc;}
+
+#premiereligne{ width: 100%;}
+header{height:457px;width: 25%;color: white;text-align: center;background: #555555;border-bottom: 1px solid black;float: left;}
+#titleheader{margin-top: 5%;}
+#content{width: 100%; display: block;}
+#content-slider{width: 75%;float: left;margin: auto; margin-bottom: 30px;}
+.slide-active{height: 456px;width: 100%;border: 1px solid black;}
+#map{width: 45%;height: 575px;border: 1px solid black;float: left;}
+iframe{width: 100%;height: 500px; float: left;}
+#booking{height: 575px; padding-left: 2px;float: left;text-align: center;width: 54%;border: 1px solid black;background-color: rgba(253, 251, 251, 0.925);}
+#countdown{margin-bottom: 10px;text-align: center;color: grey;}
+.fa, .fas {font-weight: 900;display: block;padding: 15px 0 15px 0;margin-left: 35%;}
+footer{display: none;}
+#content-slider img:not(.slide-active){display: none;}
+
+#buttons{width:300px; display:block; margin-top: 30%; margin-left: 31%;}
+#prev{display:block; margin:auto;;cursor: pointer; float: left;}
+#next{display:block; margin: auto;cursor: pointer; float: left;}
+#stop{display: block;cursor: pointer; float: left; margin-left:20px; margin-right: 20px; }
+
+input{display: block; margin: auto;width: 35%;}
+.txterror{font-size: 12px;color: red;display: block; margin: auto;}
+input:invalid {border: 1px solid #8B0000 ;}
+input:valid {border: 1px solid black;}
+label{display: block; margin: auto;}
+canvas{border: 1px solid grey;height: 100px;width: 300px;background-color: white; display: block;margin: auto;}
+h2{margin-top:5px;margin-bottom: 5px;}
+.button{ margin-left: 20px; display:block; margin:auto;border:1px solid black;padding: 5px;color: black;background-color: #fff;text-decoration: none;}
+
+.pause-on{color:rgb(187, 205, 238);}
+.arrow_active{ color:rgb(187, 205, 238);}
+.leaflet-popup-content-wrapper{border: 2px solid black; border-radius: 20%;}
+.leaflet-popup-close-button{color: black;}
+.button_form{text-decoration: none;color: black;}
+.infos{height:550px;color: black;}
+#infosstation{text-align:center;}
+#content-map-booking{ width: 100%;}
 
-}
-
-body{
-background-color:rgb(176,196,222);
-overflow-x: hidden;
-font-family:Calibri;
-}
-
-header{
-height: 100px;   
-padding-top: 50px;
-text-align: center;
-background:white;
-border-bottom: 1px solid black; 
-}
-
-#content{
-display: block;
-padding-top: 50px;
-padding-bottom: 50px;
-}
-
-#content-slider{
-width: 90%;
-height: 600px;
-margin-bottom: 70px;
-display: block;
-margin-left: 25%;
-}
-
-#content-map-booking{
-
-display: flex;
-flex-direction: row;
-  
-
-}
-
-#map{
-margin-top: 10px;    
-margin-left: 5%;
-width: 50%;
-height: 650px;
-border: 1px solid black;
-
-}
-
-iframe{
-
-width: 100%;
-height: 500px;
-
-}
-
-#booking{
-margin-right: 5%; 
-width: 50%;
-height: 655px;
-border: 1px solid black;
-background-color:whitesmoke;
-border-radius: 5%;
-margin-left: 1%;
-}
-
-#countdown{
-    margin-bottom: 10px;
-    text-align: center;
-    color: blue;
-}
-
-/*footer{
-background-color:white;
-color: black;
-height: 100px;
-border-top: 1px solid black;
-}*/
-/* Slider */
-
-.slide-active{
-    
-    height:600px; 
-    border: 1px solid black;
-
-}
-
-#content-slider img:not(.slide-active){
-
-display: none;
-
-}
-
-#buttons{
-position: relative;
-padding-top: 20px;
-
-}
-
-#prev{
-position: relative;
-right: 0px;
-cursor: pointer;
-}
-
-#next{
-position: relative;
-left: 72px;
-bottom: 64px;
-cursor: pointer;
-}
-
-
-/* fin carroussel*/
-
-/* Form */
-
-input{
-margin-left: 25%;
-width: 50%;
-margin-bottom: 15px;
-
-}
-
-.txterror{
-
-    font-size: 12px;
-    color: red;
-    margin-left: 35%;
-   position: relative;
-   top:-30px;
-}
-
-input:invalid {
-  border: 1px solid #8B0000 ;
-}
-
-input:valid {
-  border: 1px solid black;
-}
-
-label{
-margin-left: 43%;
-}
-
-form{
-
-padding-top: 3%;
-
-
-
-}
-
-canvas{
-border: 1px solid grey;
-height: 100px;
-width: 300px;
-margin-left: 26%;
-margin-top: 15px;
-background-color: white;
-margin-bottom: 30px;}
-
-h2{
-
-    margin-left: 23%;
-    margin-bottom: 20px;    
-
-}
-
-.button{
-    
-    margin-left: 25%;
-    border:1px solid black;
-    padding: 5px;
-    color: black;
-    background-color: #fff;
-    text-decoration: none;
-    border-radius: 10%;
-    position: relative;
-    top: 7px;}
-
-#stop{
-
-    position: relative;
-    top: -32px;
-    left: 35px;
-    cursor: pointer;
-    }
-
-#bt-clear{
-
-    position: relative;
-   
-    left: 10px;
-}
-
-.pause-on{
-
-    color:rgb(100,149,237);
-}
-
-
-.arrow_active{
-
-    color:rgb(100,149,237);
-
-}
-
-.leaflet-popup-content-wrapper{
-
-    border: 2px solid black;
-    border-radius: 20%;
-}
-
-.leaflet-popup-close-button{
-
-    color: black;    }
-
-.button_form{
-    text-decoration: none;
-    color: black;
-}
-
-#submit:focus{
-
-/*background-color: steelblue;*/
-
-
-}
-
-.infos{
-
-    height: 200px;
-    color: black;
-}
-
-#infosstation{
- text-align:center;
-
-}
 
 @media screen and (max-width: 1024px){
 
+ *{ max-width: 100%;}   
 
-body{
-    overflow-x: hidden;
-}
-    
-#content-slider{
-    display: flex;
-    flex-direction: column;
-    margin-left: 5%;
-    position: relative;
-}
+header{width: 100%; height: auto; padding-bottom: 15px; margin-bottom: 20px;}
+.fa, .fas {    margin-left: 14%;}    
+#buttons{display: block;margin-left: 42%;margin-top: 5%;width: 50%;;}
 
+#content{margin-left: 0px;margin-right: 0px;width: 100%;}
 
-#content-map-booking{
+#content-slider{display: flex;flex-direction: column;margin-left: 0%;position: relative; width: 100%;height: auto;margin-bottom: 20px;}
 
-    display: flex;
-    flex-direction: column;
+#slideactive{ width: 100;}
 
+#content-map-booking{display: flex;flex-direction: column;}
 
-}
+#content-slider img{
+height: auto;width: 80%;margin-left: 0%;}
 
-#booking{
+#content-slider img {height: auto;width: 100%;margin-left: 0%;}
 
-width: 90%;
-margin-left: 5%;
-margin-top: 15px;
-height:auto ;
-}
-
+#booking{width: 100%;margin-left: 0%;margin-top: 20px;height:auto ;}
+.leaflet-popup{display: none;}
 #map{
 
-    width: 90%;
-    margin-left : 5%;     
+    width: 100%;
+     
 }
 
 input{
 
     width: 30%;
-    margin-left: 31%;
     margin-top: 5px;
 }
 
 
 
 canvas{
-    width: 50%;
-    margin-left: 23%;
-    height: 10%;
+    width: 60%;
+    height: 7%;
 }
 
 #bt-clear{
 
-    margin-left: 5px;
+    margin-left: 45%;
 }
 
 form{
@@ -305,6 +94,12 @@ form{
 
 h2{
 
-    margin-left: 25%;
+    margin-left: 0%;
 }
+}
+
+@media screen and (max-width: 450px){
+
+#buttons{margin-left: 33%;width: 50%}
+input{width: 60%;}
 }

@@ -4,7 +4,8 @@ var canvas = {
   storage: false,
   timer: null,
   reservationdate: null,
-  maxtime: 12000,
+  maxtime: 1200000,
+  reserved: false,
   init: function () {
     var that = this
     this.valider()
@@ -80,7 +81,12 @@ var canvas = {
     var oPos = that.getPosition(oEvent);
     this.oCanvas.posX = oPos.posX;
     this.oCanvas.posY = oPos.posY;
-    this.oCanvas.bDraw = true;
+    if (this.reserved == true) {
+      this.oCanvas.bDraw = false;
+    } else {
+      this.oCanvas.bDraw = true;
+    }
+
     this.capturer(false);
   },//fct
 
@@ -105,8 +111,6 @@ var canvas = {
       oCapture.appendChild(oImage);
     }
   },
-
-  // au clique sur le bouton "effacer" efface le contenu du canvas
   clear: function (oEvent) {
     this.oCanvas = document.getElementById("canvas")
     var oCtx = this.oCanvas.getContext('2d');
@@ -114,23 +118,43 @@ var canvas = {
     this.capturer(false);
   },
 
+  /**
+   * INITIALISATION DU TIMER
+   */
   launchtimer: function () {
     var that = this
     this.timer = setInterval(function () {
 
-      var remain = new Date() - that.reservationdate
+      var remain = new Date() - Date.parse(sessionStorage.getItem('reservationdate'))
 
       if (remain >= that.maxtime) {
         alert('Votre réservation à expiré !')
+        /**
+         * Une fois le timer terminé, réincrémente le nombre de vélos disponibles de 1 
+         */
+        var savedstation = sessionStorage.getItem('stationname')
+        if (savedstation == app.map.selected_station) {
+          var nbvelos = document.getElementsByClassName("nbvelos")
+          for (var i = 0; i < nbvelos.length; i++) {
+            var nb = parseInt(nbvelos[i].innerHTML) + 1
+            document.getElementsByClassName("nbvelos")[i].innerHTML = nb
+          }
+        }
         that.stoptimer()
+        that.reserved = false
       }
 
-      var spent = that.maxtime - remain
 
+      var spent = that.maxtime - remain
+      /**
+       * Conversion en minutes et secondes des 1200000ms
+       */
       var minutes = Math.floor(spent / 60000)
       var secondes = Math.floor((spent % 60000) / 1000)
-      document.getElementById('tempsrestant').innerHTML = ' ' + minutes + ' minutes et ' + secondes + ' secondes'
-
+      var tempsrestant = document.getElementById('tempsrestant')
+      if (tempsrestant) {
+        tempsrestant.innerHTML = ' ' + minutes + ' minutes et ' + secondes + ' secondes'
+      }
     }, 1000)
 
 
@@ -150,7 +174,8 @@ var canvas = {
 
 
   /**
-   *validation de la réservation */
+   *verification de la signature
+   */
   valider: function () {
     var that = this
     $('#form').submit(function (e) {
@@ -158,8 +183,15 @@ var canvas = {
         alert('Merci de signer dans l\'encadré prévu à cet effet.')
         return false
       }
+/**
+ * Soustrait un vélo aux nombre de vélos disponibles sur la carte et dans le formulaire
+ */
+      var nbvelos = document.getElementsByClassName("nbvelos")
+      for (var i = 0; i < nbvelos.length; i++) {
+        var nb = nbvelos[i].innerHTML - 1
+        document.getElementsByClassName("nbvelos")[i].innerHTML = nb
+      }
 
-  
       //sauvegarde des information entrées par l'utilisateur
       localStorage.setItem('nameinfo', document.getElementById("name").value)
       localStorage.setItem('firstnameinfo', document.getElementById("firstname").value)
@@ -167,14 +199,21 @@ var canvas = {
       that.reservationdate = new Date()
       sessionStorage.setItem('reservationdate', that.reservationdate)
       that.setReservationText()
-
+      document.getElementById("name").readOnly = true
+      document.getElementById("firstname").readOnly = true
+      document.getElementById("canvas").readOnly = true
+      document.getElementById('bt-clear').style.display="none" 
       //timer
       that.launchtimer()
+      that.reserved = true
       return false
+
     })
   },
+  /**
+   * Mise en place du message du timer 
+   */
   setReservationText: function () {
-
     var html = "Vélo réservé à la station " + app.map.selected_station + "<br> Temps restant : <span id='tempsrestant'> </span>"
     document.getElementById("countdown").innerHTML = html
   },

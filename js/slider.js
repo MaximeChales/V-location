@@ -6,7 +6,8 @@ var slider = {
     sens: 1,
     pause_on_off: "off",
     init: function () {
-        //choix de l'emplacement du slider. on va alors associer les conteneurs d image et du slider à leurs équivalent  dans LHTML. 
+
+ //choix de l'emplacement du slider. on va alors associer les conteneurs d image et du slider à leurs équivalent  dans LHTML. 
         this.content_slider = $("#content-slider") 
         this.current_image = this.content_slider.find(".slide-active")
         this.nav_click()
@@ -60,7 +61,7 @@ var slider = {
         })
     },
 
-//Association des événements next prev et pause aux boutons sous le Slider.
+//Association des événements next prev et pause aux boutons.
     nav_click: function () {
         var that = this
 
@@ -79,8 +80,6 @@ var slider = {
         })
 
 // Association de prev pause et next aux touches
-
-
         $('html').keydown(function (e) {
             if (event.which == 37) { that.prev() }
             if (event.which == 39) { that.next() }
